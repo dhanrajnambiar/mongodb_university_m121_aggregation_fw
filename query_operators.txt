@@ -1,2 +1,11 @@
 "$size":- Used to select arrays with number of elements equal to parameter value.
-eg: db.movies.find({"field_name":{"$size": length_value}})
+eg:
+ db.movies.find({"field_name":{"$size": length_value}})
+--------------------------------------------------------------------------------
+
+#$elemMatch":- matches all documents with an specifed array field("x"), with atleast one element of the "x" matching "all the conditions specified" passed as arguments to $elemMatch.
+eg:
+ db.movies.find({"countries":{"$elemMatch":{"$eq":"France"}}});
+  Here conditions are '"$eq":"France"'(one only; can specify multiple).
+  conditions will be checked for only field mentioned.
+--------------------------------------------------------------------------------
