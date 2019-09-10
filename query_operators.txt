@@ -1,0 +1,2 @@
+"$size":- Used to select arrays with number of elements equal to parameter value.
+eg: db.movies.find({"field_name":{"$size": length_value}})

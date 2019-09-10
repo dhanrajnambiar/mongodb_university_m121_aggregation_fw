@@ -1,0 +1,3 @@
+"$size":- Used as aggregation operator to extract length of an array in a stage of a agg pipeline.
+eg:
+db.movies.aggregate([{"$project":{"array_size":["$size" : "$array_field_name"]}}])
