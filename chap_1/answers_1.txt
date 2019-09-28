@@ -1,0 +1,5 @@
+pipeline 1=[{$match:{"imdb.rating":{$gte:7},genres:{$nin:["Horror","Crime"]},rated:{$in:["PG","G"]},languages:{$all:["Japanese","English"]}}}];
+pipeline 2 = [{"$match":{"imdb.rating":{"$gte":7}, "genres":{"$nin":["Horror","Crime"]}, "rated":{"$in":["PG","G"]}, "languages":{"$all":["Japanese", "English"]}}},{"$project":{"_id":0, "title":1, "rated":1}}]
+pipeline3 = [{"$project":{"_id":0, "sp_title":{"$split":["$title", " "]}}}, {"$match":{"sp_title":{"$size":1}}}, {"$project":{"sp_title":1}}]
+pipeline 4 = [{"$match":{"writers":{"$elemMatch":{"$exists":true}}}},{"$project":{"_id":0, "writer_list":{"$map":{"input":"$writers", "as":"scrptr", "in":{"$arrayElemAt":[{"$split":["$$scrptr", "("]}, 0]}}}}}]
+

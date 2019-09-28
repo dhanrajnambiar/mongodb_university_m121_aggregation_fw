@@ -1,0 +1,6 @@
+my answer
+db.movies.aggregate([{"$match":{"countries":{"$elemMatch":{"$all":["USA"]}}, "cast":{"$elemMatch":{"$exists":true}} ,"tomatoes.viewer.rating":{"$gte":3}}}, {"$addFields":{"num_fav":{"$size":{"$setIntersection":["$cast", ["Sandra Bullock","Tom Hanks","Julia Roberts","Kevin Spacey","George Clooney"]]}}}}, {"$project":{"_id":0, "countries":1, "tomateena":"$tomatoes.viewer.rating", "cast":1, "num_fav":1, "title":1}}, {"$sort":{"num_fav":-1, "tomateena":-1, "title":-1}}, {"$skip":24}, {"$limit":1} ])
+correct answer
+db.movies.aggregate([  {    $match: {      "tomatoes.viewer.rating": { $gte: 3 },      countries: "USA",      cast: {        $in: favorites      }  }  },  {    $project: {      _id: 0,      title: 1,      "tomatoes.viewer.rating": 1,      num_favs: {        $size: {          $setIntersection: [ "$cast",            favorites          ]        }      }    }  },  {    $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 }  },  {    $skip: 24  },  {    $limit: 1  }])
+
+
